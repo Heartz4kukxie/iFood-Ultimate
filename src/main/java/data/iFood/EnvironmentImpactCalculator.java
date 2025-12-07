@@ -2,17 +2,21 @@ package data.iFood;
 import java.util.Scanner;
 
 /*
-* Akuah's implementation
-* */
+ This class calculates the environmental impact 
+ of different food items based on user input and preset meals
+*/
 
 public class EnvironmentImpactCalculator{
+     // Scanner object to read user input
     private Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+    // An instance of the calculator to access non-static fields/methods
         EnvironmentImpactCalculator calculator = new EnvironmentImpactCalculator();
 
         System.out.println("Perform Your Food Choices");
 
+        // Getting user input for a custom food item
         System.out.print("Enter food name: ");
         String name = calculator.sc.nextLine();
 
@@ -25,9 +29,10 @@ public class EnvironmentImpactCalculator{
         System.out.print("Enter food weight in kg: ");
         double weight = calculator.sc.nextDouble();
 
+        // Creating a FoodItem based on the user's input
         FoodItem otherMeal = new FoodItem(name, carbon, water, weight);
 
-        // Displaying the result
+        // Displaying main food
         System.out.println("\nMain Foods\n\n");
 
         // First object
@@ -56,6 +61,8 @@ public class EnvironmentImpactCalculator{
 
         System.out.println("\nMeal Summary\n");
         usersMeal.displayMealImpact();
+
+        // Compare the user's meal with alternative meals
         calculator.compareWithAlternativeMeals(usersMeal);
 
         calculator.sc.close();
@@ -95,7 +102,8 @@ public class EnvironmentImpactCalculator{
         System.out.println("Cheese total carbon is: " + cheeseOverload.getCarbonFootprint() + " kg CO₂");
         System.out.println("Cheese total water usage is: " + cheeseOverload.getWaterUsage() + " L");
 
-        // Simple message about which is lowest in carbon
+
+        // Determine which meal has the lowest carbon footprint
         double userCarbon = usersMeal.getCarbonFootprint();
         double beefCarbon = beefOverload.getCarbonFootprint();
         double vegCarbon = lentilOverload.getCarbonFootprint();
