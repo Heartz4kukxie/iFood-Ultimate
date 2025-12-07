@@ -1,15 +1,21 @@
 package data.iFood;
 
 /*
-* Josue's implementation
+* This class represents a general food item with its environmental impact.
+ * Every specific food type (Beef, Cheese, Lentils, etc.) inherits from this class.
+ */
 * */
 
 public class FoodItem {
-    // Variable declaration
+    
+     // Instance variables
     private String name;
-    private double carbonFootprintPerKg, waterUsagePerKg, weightInKg;
+    private double carbonFootprintPerKg;  // carbon emitted per kg
+    private double waterUsagePerKg;       // water used per kg
+    private double weightInKg;            // actual weight of the food item
 
-    // Constructor
+    // Constructor for creating a FoodItem.
+    
     FoodItem(String name, double carbonFootprintPerKg, double waterUsagePerKg, double weightInKg){
         // initializing the name
         this.name = name;
@@ -37,6 +43,7 @@ public class FoodItem {
     // Setters
     public void setCarbonFootprintPerKg(double carbonFootprintPerKg) {
         // Check footprint
+        // Carbon footprint cannot be negative
         if (carbonFootprintPerKg >= 0) {
             this.carbonFootprintPerKg = carbonFootprintPerKg;
         } else {
@@ -45,6 +52,7 @@ public class FoodItem {
     }
     public void setWaterUsagePerKg(double waterUsagePerKg) {
         // Check waterusage in the food
+         // Water usage cannot be negative
         if (waterUsagePerKg >= 0){
             this.waterUsagePerKg = waterUsagePerKg;
         } else {
@@ -52,21 +60,28 @@ public class FoodItem {
         }
     }
     public void setWeightInKg(double weightInKg) {
+         // Food weight cannot be negative
         if (weightInKg >= 0) {
             this.weightInKg = weightInKg;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Weight cannot be negative.");
         }
     }
 
-    // Setters + operations to perform
+    // Calculates the total carbon footprint based on weight.
     public double calculateCarbonFootprint(){
         return carbonFootprintPerKg * this.weightInKg;
     }
+
+    //Calculates the total water usage based on weight.
     public double calculateWaterUsage() {
         return waterUsagePerKg * this.weightInKg;
     }
 
+    // --------------------------
+    // Output Formatting
+    // --------------------------
+    
     @Override
     public String toString() {
         return String.format("Food Item >> %s: %.2f kg\nEnvironmental Impact | Carbon: %.1f kg CO₂, Water: %.0f L",
